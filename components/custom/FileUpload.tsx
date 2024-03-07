@@ -3,6 +3,7 @@
 import React, { useRef, useState } from "react";
 import axios from "axios";
 import { IoIosClose } from "react-icons/io";
+import { useFileContext } from "@/app/context/file-context";
 
 enum UploadStatus {
     Select = "select",
@@ -12,7 +13,8 @@ enum UploadStatus {
 
 const FileUpload: React.FC = () => {
     const inputRef = useRef<HTMLInputElement>(null);
-    const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    const { selectedFile, setSelectedFile } = useFileContext();
+    const [file, setFile] = useState<File | null>(null);
     const [progress, setProgress] = useState<number>(0);
     const [uploadStatus, setUploadStatus] = useState<UploadStatus>(
         UploadStatus.Select
@@ -21,7 +23,7 @@ const FileUpload: React.FC = () => {
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files;
         if (files && files.length > 0) {
-            setSelectedFile(files[0]);
+            setFile(files[0]);
         }
     };
 
@@ -34,6 +36,7 @@ const FileUpload: React.FC = () => {
             inputRef.current.value = "";
         }
         setSelectedFile(null);
+        setFile(null);
         setProgress(0);
         setUploadStatus(UploadStatus.Select);
     };
@@ -47,8 +50,9 @@ const FileUpload: React.FC = () => {
         try {
             setUploadStatus(UploadStatus.Uploading);
             const formData = new FormData();
-            if (selectedFile) {
-                formData.append("file", selectedFile);
+            if (file) {
+                console.log(file);
+                formData.append("file", file);
 
                 await axios.post("http://localhost:5328/api/upload", formData, {
                     onUploadProgress: (progressEvent: any) => {
@@ -56,6 +60,7 @@ const FileUpload: React.FC = () => {
                             (progressEvent.loaded * 100) / progressEvent.total
                         );
                         setProgress(percentCompleted);
+                        setSelectedFile(file);
                     },
                 });
 
@@ -74,28 +79,25 @@ const FileUpload: React.FC = () => {
                 onChange={handleFileChange}
                 className='hidden'
             />
-            {!selectedFile && (
+            {!file && (
                 <button
-                    className='w-82 h-37 text-lg font-medium flex flex-col items-center justify-center gap-4 text-indigo-600 bg-white border-2 border-dashed border-indigo-600 rounded-lg cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-indigo-600'
+                    className='py-2 px-4 w-full text-red-600 bg-white border-2 border-dashed border-red-600 rounded-lg cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-red-600'
                     onClick={onChooseFile}
                 >
-                    <span className='material-symbols-outlined text-3xl bg-purple-100 rounded-full w-12 h-12 flex items-center justify-center'>
-                        upload
-                    </span>
                     Upload File
                 </button>
             )}
-            {selectedFile && (
+            {file && (
                 <>
-                    <div className='w-75 flex items-center gap-4 text-black bg-white border border-indigo-200 rounded-md p-2'>
+                    <div className='w-75 flex items-center gap-4 text-black bg-white border border-red-200 rounded-md p-2'>
                         <div className='flex-1 flex items-center gap-4'>
                             <div className='flex-1'>
                                 <h6 className='text-sm font-normal'>
-                                    {selectedFile?.name}
+                                    {file?.name}
                                 </h6>
                                 <div className='w-full h-1 bg-gray-200 rounded-full mt-2'>
                                     <div
-                                        className='h-1 bg-indigo-600 rounded-full'
+                                        className='h-1 bg-red-600 rounded-full'
                                         style={{ width: `${progress}%` }}
                                     ></div>
                                 </div>
@@ -103,14 +105,14 @@ const FileUpload: React.FC = () => {
                             {uploadStatus === UploadStatus.Select ? (
                                 <button
                                     onClick={clearFileInput}
-                                    className='w-9 h-9 flex items-center justify-center text-sm text-indigo-800 bg-purple-100 rounded-full'
+                                    className='w-9 h-9 flex items-center justify-center text-sm text-red-800 bg-red-100 rounded-full'
                                 >
                                     <span className='material-symbols-outlined text-2xl'>
                                         <IoIosClose />
                                     </span>
                                 </button>
                             ) : (
-                                <div className='w-9 h-9 flex items-center justify-center text-sm text-indigo-800 bg-purple-100 rounded-full'>
+                                <div className='w-9 h-9 flex items-center justify-center text-sm text-red-800 bg-red-100 rounded-full'>
                                     {uploadStatus === UploadStatus.Uploading ? (
                                         `${progress}%`
                                     ) : uploadStatus === UploadStatus.Done ? (
@@ -123,12 +125,12 @@ const FileUpload: React.FC = () => {
                         </div>
                     </div>
                     <button
-                        className='w-82 text-sm font-medium text-white bg-indigo-500 rounded-md p-2 mt-4 cursor-pointer'
+                        className='w-full text-sm font-medium text-white bg-red-500 rounded-md p-2 mt-4 cursor-pointer'
                         onClick={handleUpload}
                     >
                         {uploadStatus === UploadStatus.Select ||
                         uploadStatus === UploadStatus.Uploading
-                            ? "Upload"
+                            ? "Upload and begin chatting!"
                             : "Done"}
                     </button>
                 </>

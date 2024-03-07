@@ -4,9 +4,11 @@ import { Textarea } from "@/components/ui/textarea";
 import EditableTextInput from "../custom/editable-input";
 import { useState } from "react";
 import FileUpload from "../custom/FileUpload";
+import { useFileContext } from "@/app/context/file-context";
 
 export function ChatInterface() {
     const [message, setMessage] = useState<string>("");
+    const { selectedFile } = useFileContext();
     const [messages, setMessages] = useState<
         { text: string; sender: string }[]
     >([]);
@@ -27,7 +29,7 @@ export function ChatInterface() {
     };
 
     return (
-        <div className='grid w-full max-w-3xl border border-gray-200 rounded-lg shadow-md dark:border-gray-800'>
+        <div className='grid w-full max-w-3xl border border-zinc-200 rounded-lg shadow-md dark:border-gray-800'>
             <div className='flex border-b rounded-t-lg'>
                 <div className='flex-1 grid place-items-center py-3'>
                     <div className='flex items-center gap-2'>
@@ -64,42 +66,24 @@ export function ChatInterface() {
                         </div>
                     </div>
                 ))}
-                {/* <div className='flex justify-end items-start gap-4'>
-                    <div className='rounded-lg bg-gray-100 p-4 text-sm break-words max-w-[75%]'>
-                        I'm looking for a good book recommendation. Can you help
-                        me out?
-                    </div>
-                </div>
-                <div className='flex items-start gap-4'>
-                    <div className='rounded-lg bg-gray-100 p-4 text-sm break-words max-w-[75%]'>
-                        Of course! I can help with that. What genre are you
-                        interested in?
-                    </div>
-                </div>
-                <div className='flex justify-end items-start gap-4'>
-                    <div className='rounded-lg bg-gray-100 p-4 text-sm break-words max-w-[75%]'>
-                        I'm interested in science fiction.
-                    </div>
-                </div>
-                <div className='flex items-start gap-4'>
-                    <div className='rounded-lg bg-gray-100 p-4 text-sm break-words max-w-[75%]'>
-                        Great choice! I have some recommendations in mind. One
-                        moment while I fetch the details.
-                    </div>
-                </div> */}
             </div>
             <div className='border-t'>
                 <div className='p-4'>
                     <div className='grid gap-2'>
-                        <FileUpload />
-                        <div className='relative'>
-                            <Textarea
-                                className='peer h-20 min-h-[100px]'
-                                placeholder='Hit enter ↵ to send...'
-                                onKeyDown={handleKeyDown}
-                                onChange={(e) => setMessage(e.target.value)}
-                            />
-                        </div>
+                        {!!selectedFile ? (
+                            <div className='relative'>
+                                <Textarea
+                                    className='peer h-20 min-h-[100px]'
+                                    placeholder='Hit enter ↵ to send...'
+                                    onKeyDown={handleKeyDown}
+                                    onChange={(e) => setMessage(e.target.value)}
+                                />
+                            </div>
+                        ) : (
+                            <div className='text-center'>
+                                <FileUpload />
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
@@ -147,3 +131,30 @@ function TextIcon(props: any) {
         </svg>
     );
 }
+
+/*
+                { <div className='flex justify-end items-start gap-4'>
+                    <div className='rounded-lg bg-gray-100 p-4 text-sm break-words max-w-[75%]'>
+                        I'm looking for a good book recommendation. Can you help
+                        me out?
+                    </div>
+                </div>
+                <div className='flex items-start gap-4'>
+                    <div className='rounded-lg bg-gray-100 p-4 text-sm break-words max-w-[75%]'>
+                        Of course! I can help with that. What genre are you
+                        interested in?
+                    </div>
+                </div>
+                <div className='flex justify-end items-start gap-4'>
+                    <div className='rounded-lg bg-gray-100 p-4 text-sm break-words max-w-[75%]'>
+                        I'm interested in science fiction.
+                    </div>
+                </div>
+                <div className='flex items-start gap-4'>
+                    <div className='rounded-lg bg-gray-100 p-4 text-sm break-words max-w-[75%]'>
+                        Great choice! I have some recommendations in mind. One
+                        moment while I fetch the details.
+                    </div>
+                </div> 
+                
+*/
