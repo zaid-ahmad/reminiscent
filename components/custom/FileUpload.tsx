@@ -81,7 +81,7 @@ const FileUpload: React.FC = () => {
             />
             {!file && (
                 <button
-                    className='py-2 px-4 w-full text-red-600 bg-white border-2 border-dashed border-red-600 rounded-lg cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-red-600'
+                    className='py-2 px-4 w-full text-red-600 bg-white dark:bg-zinc-800 border-2 border-dashed border-red-600 rounded-lg cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-red-600'
                     onClick={onChooseFile}
                 >
                     Upload File
@@ -89,7 +89,7 @@ const FileUpload: React.FC = () => {
             )}
             {file && (
                 <>
-                    <div className='w-75 flex items-center gap-4 text-black bg-white border border-red-200 rounded-md p-2'>
+                    <div className='w-75 flex items-center gap-4 text-black bg-white border rounded-md p-2 dark:border-zinc-900 dark:bg-zinc-800 dark:text-zinc-200'>
                         <div className='flex-1 flex items-center gap-4'>
                             <div className='flex-1'>
                                 <h6 className='text-sm font-normal'>

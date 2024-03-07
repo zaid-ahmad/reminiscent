@@ -47,8 +47,8 @@ export function ChatInterface() {
                 </div>
             </div>
             <div className='p-4 grid gap-4 h-80 overflow-y-scroll'>
-                <div className='flex items-start gap-4'>
-                    <div className='rounded-lg bg-gray-100 p-4 text-sm break-words max-w-[75%]'>
+                <div className='flex items-start gap-2'>
+                    <div className='rounded-lg bg-zinc-100 p-4 text-sm break-words max-w-[75%] dark:bg-zinc-300 dark:text-zinc-950'>
                         Go to the WhatsApp chat that you wish the AI to talk
                         like and export the chat. Upload that text file and
                         begin chatting!
@@ -61,7 +61,7 @@ export function ChatInterface() {
                             msg.sender === "You" ? "justify-end" : ""
                         }`}
                     >
-                        <div className='rounded-lg bg-gray-100 p-4 text-sm break-words max-w-[75%]'>
+                        <div className='rounded-lg bg-red-500 p-4 text-sm break-words max-w-[75%]'>
                             {msg.text}
                         </div>
                     </div>
@@ -75,6 +75,7 @@ export function ChatInterface() {
                                 <Textarea
                                     className='peer h-20 min-h-[100px]'
                                     placeholder='Hit enter ↵ to send...'
+                                    value={message}
                                     onKeyDown={handleKeyDown}
                                     onChange={(e) => setMessage(e.target.value)}
                                 />
