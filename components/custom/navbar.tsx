@@ -7,7 +7,7 @@ const Navbar: FunctionComponent<NavbarProps> = () => {
     return (
         <header className='flex justify-around py-7'>
             <h2 className='text-xl font-bold'>
-                Remini<span className='italic'>s</span>cent
+                Remini<span className='italic text-red-600'>s</span>cent
             </h2>
             <ModeToggle />
         </header>
