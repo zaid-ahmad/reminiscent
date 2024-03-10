@@ -36,7 +36,6 @@ def get_chat_doc():
 
     latest_chat_history = json.loads(latest_chat_history_str) if latest_chat_history_str else []
 
-
     if (bool(first_time)):
         file = request.files['file'].read().decode('utf-8')
         formatted_data = format_messages(file, name)
