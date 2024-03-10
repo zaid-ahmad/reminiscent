@@ -1,2 +1,6 @@
-numpy==1.24.3
-Flask==2.2.2
+numpy==1.26.4
+Flask==3.0.2
+flask-cors
+regex
+cohere
+python-dotenv
