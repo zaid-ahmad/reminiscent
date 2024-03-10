@@ -1,24 +1,25 @@
 import { FunctionComponent } from "react";
 import { ModeToggle } from "../ui/mode-toggle";
+import EditableTextInput from "./editable-input";
+import { IoPersonSharp } from "react-icons/io5";
 
-interface NavbarProps {}
-
-const Navbar: FunctionComponent<NavbarProps> = () => {
+const Navbar: FunctionComponent = () => {
     return (
-        <header className='flex justify-around py-7'>
+        <header className='flex justify-between items-center py-3 px-7'>
             <h2 className='text-xl font-bold'>
                 Remini<span className='italic text-red-600'>s</span>cent
             </h2>
+            <div>
+                <div className='flex items-center justify-end gap-2'>
+                    <IoPersonSharp />
+                    <span className='font-semibold'>
+                        <EditableTextInput />
+                    </span>
+                </div>
+            </div>
             <ModeToggle />
         </header>
     );
 };
 
 export default Navbar;
-
-/*
-    TODO:
-    1. User should be able to send messages only after the txt file is uploaded.
-    2. User should be able to upload the .txt file with the progress bar.
-    3. Follow the same pattern as the supabase's chat prompt appplication. (links: https://www.youtube.com/watch?v=xmfNUCjszh4 | https://github.com/supabase-community/nextjs-openai-doc-search/blob/main/components/SearchDialog.tsx)
-*/

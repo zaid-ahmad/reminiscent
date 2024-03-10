@@ -3,11 +3,13 @@ import Navbar from "@/components/custom/navbar";
 
 export default function Home() {
     return (
-        <main>
-            <Navbar />
-            <section className='flex flex-col items-center'>
+        <>
+            <header>
+                <Navbar />
+            </header>
+            <main className='flex flex-col items-center justify-center'>
                 <ChatInterface />
-            </section>
-        </main>
+            </main>
+        </>
     );
 }

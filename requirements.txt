@@ -1,3 +1,6 @@
 numpy==1.26.4
 Flask==3.0.2
 flask-cors
+regex
+cohere
+python-dotenv

@@ -3,7 +3,11 @@
 import React, { useRef, useState } from "react";
 import axios from "axios";
 import { IoIosClose } from "react-icons/io";
-import { useFileContext } from "@/app/context/file-context";
+import {
+    useChatHistoryContext,
+    useFileContext,
+    useNameContext,
+} from "@/app/context/context-provider";
 
 enum UploadStatus {
     Select = "select",
@@ -13,7 +17,10 @@ enum UploadStatus {
 
 const FileUpload: React.FC = () => {
     const inputRef = useRef<HTMLInputElement>(null);
-    const { selectedFile, setSelectedFile } = useFileContext();
+    const { setSelectedFile } = useFileContext();
+    const { addMessageToChat } = useChatHistoryContext();
+    const { name } = useNameContext();
+
     const [file, setFile] = useState<File | null>(null);
     const [progress, setProgress] = useState<number>(0);
     const [uploadStatus, setUploadStatus] = useState<UploadStatus>(
@@ -51,18 +58,33 @@ const FileUpload: React.FC = () => {
             setUploadStatus(UploadStatus.Uploading);
             const formData = new FormData();
             if (file) {
-                console.log(file);
                 formData.append("file", file);
+                if (
+                    name ===
+                    "Click to enter the same name saved in your WhatsApp chat"
+                ) {
+                    alert(
+                        "Please type in the name of the person saved in your WhatsApp."
+                    );
+                    return;
+                }
+                formData.append("name", name);
+                formData.append("firstTime", String(1));
 
-                await axios.post("http://localhost:5328/api/upload", formData, {
-                    onUploadProgress: (progressEvent: any) => {
-                        const percentCompleted = Math.round(
-                            (progressEvent.loaded * 100) / progressEvent.total
-                        );
-                        setProgress(percentCompleted);
-                        setSelectedFile(file);
-                    },
-                });
+                await axios
+                    .post("http://localhost:5328/api/upload", formData, {
+                        onUploadProgress: (progressEvent: any) => {
+                            const percentCompleted = Math.round(
+                                (progressEvent.loaded * 100) /
+                                    progressEvent.total
+                            );
+                            setProgress(percentCompleted);
+                            setSelectedFile(file);
+                        },
+                    })
+                    .then((response) => {
+                        addMessageToChat("CHATBOT", response.data);
+                    });
 
                 setUploadStatus(UploadStatus.Done);
             }

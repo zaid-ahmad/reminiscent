@@ -1,13 +1,15 @@
 "use client";
 
+import { useNameContext } from "@/app/context/context-provider";
 import React, { useState } from "react";
+import { Input } from "../ui/input";
 
 const EditableTextInput = () => {
     const [isEditing, setIsEditing] = useState(false);
-    const [text, setText] = useState("ChatGPT");
+    const { name, setName } = useNameContext();
 
     const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setText(event.target.value);
+        setName(event.target.value);
     };
 
     const toggleEdit = () => {
@@ -17,17 +19,17 @@ const EditableTextInput = () => {
     return (
         <div className='flex justify-center items-center'>
             {isEditing ? (
-                <input
+                <Input
                     type='text'
-                    value={text}
+                    value={name}
                     onChange={handleTextChange}
                     onBlur={toggleEdit}
-                    className='input border border-gray-300 p-2 rounded'
+                    className='w-full'
                     autoFocus
                 />
             ) : (
                 <span onClick={toggleEdit} className='cursor-pointer'>
-                    {text}
+                    {name}
                 </span>
             )}
         </div>
