@@ -71,10 +71,10 @@ export function ChatInterface() {
     };
 
     return (
-        <div className='w-[80rem] max-w-7xl rounded border border-zinc-200 shadow-md dark:border-gray-800 dark:bg-zinc-900'>
-            <div className='w-[80rem] max-w-7xl h-[480px] p-4 overflow-y-auto'>
+        <div className='w-full sm:w-[80rem] max-w-7xl rounded border border-zinc-200 shadow-md dark:border-gray-800 dark:bg-zinc-900'>
+            <div className='w-full sm:w-[80rem] max-w-7xl h-[480px] p-4 overflow-y-auto'>
                 <div className='flex items-start gap-2 animate-slide-up'>
-                    <div className='rounded-lg bg-zinc-100 p-4 text-sm break-words max-w-[50%] dark:bg-zinc-800 dark:text-zinc-100'>
+                    <div className='rounded-lg bg-zinc-100 p-4 text-sm break-words max-w-[65%] sm:max-w-[55%] dark:bg-zinc-800 dark:text-zinc-100'>
                         Go to the WhatsApp chat that you wish the AI to talk
                         like and export the chat. Upload that text file and
                         begin chatting!
@@ -88,7 +88,7 @@ export function ChatInterface() {
                                     key={index}
                                     className='flex items-start gap-4 animate-slide-up'
                                 >
-                                    <div className=' rounded-3xl bg-zinc-100 p-4 mt-2 text-sm break-words max-w-[55%] dark:bg-zinc-800 dark:text-zinc-100'>
+                                    <div className=' rounded-3xl bg-zinc-100 p-4 mt-2 text-sm break-words max-w-[65%] sm:max-w-[55%] dark:bg-zinc-800 dark:text-zinc-100'>
                                         {msg.message}
                                     </div>
                                 </div>
