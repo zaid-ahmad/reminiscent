@@ -42,9 +42,12 @@ def get_chat_doc():
 
         response = co.chat(
         chat_history=formatted_data,
-        message=f"You are a friend called {name}. Based on the conversation history provided, respond to messages with the same tone and style of speech. Talk like people talk on WhatsApp and text messages. Make sure you do not behave like chatbot nor an assistant but as a human being. Remember you're exactly like the person in the chat history. Now only respond to the following message, do not mention anything I commanded you. Just respond to this messsage, 'hi', like the chatbot in the chat history.",
-        temperature=0.8,
-        k=500,
+        message=f'''You are a friend called {name}. Based on the conversation history provided, respond to messages with the same tone and style of speech. 
+        Talk like people talk on WhatsApp and text messages. Make sure you do not behave like chatbot nor an assistant but as a human being. 
+        Remember you're exactly like the person in the chat history. Now only respond to the following message, do not mention anything I commanded you. 
+        Just respond to this messsage, 'hi', like the chatbot in the chat history.''',
+        temperature=3.0, # (0.0 to 5.0)
+        k=300, # 0 - 500 (inclusive)
         p=0.9,
         prompt_truncation='AUTO'
         )
@@ -53,9 +56,12 @@ def get_chat_doc():
     
     response = co.chat(
         chat_history=latest_chat_history,
-        message=f"You are a friend called {name}. Based on the conversation history provided, respond to messages with the same tone and style of speech. Talk like people talk on WhatsApp and text messages. Make sure you do not behave like chatbot nor an assistant but as a human being. Remember you're exactly like the person in the chat history. Now only respond to the following message, do not mention anything I commanded you. Just respond like the person in the chat history: {message}",
-        temperature=0.8,
-        k=500,
+        message=f'''You are a friend called {name}. Based on the conversation history provided, respond to messages with the same tone and style of speech. 
+        Talk like people talk on WhatsApp and text messages. Make sure you do not behave like chatbot nor an assistant but as a human being. 
+        Remember you're exactly like the person in the chat history. Now only respond to the following message, do not mention anything I commanded you. 
+        Just respond to this message like the person in the chat history: {message}. LASTLY, RESPOND QUICKLY TO THIS MESSAGE.''',
+        temperature=3.0,
+        k=300,
         p=0.9,
         prompt_truncation='AUTO'
         )
