@@ -7,6 +7,7 @@ import {
     useChatHistoryContext,
     useFileContext,
     useNameContext,
+    useTypingStatusContext,
 } from "@/app/context/context-provider";
 
 enum UploadStatus {
@@ -18,7 +19,9 @@ enum UploadStatus {
 const FileUpload: React.FC = () => {
     const inputRef = useRef<HTMLInputElement>(null);
     const { setSelectedFile } = useFileContext();
-    const { addMessageToChat } = useChatHistoryContext();
+    const { addMessageToChat, concatChats, addNewMessageToChat } =
+        useChatHistoryContext();
+    const { setStatus } = useTypingStatusContext();
     const { name } = useNameContext();
 
     const [file, setFile] = useState<File | null>(null);
@@ -70,6 +73,7 @@ const FileUpload: React.FC = () => {
                 }
                 formData.append("name", name);
                 formData.append("firstTime", String(1));
+                setStatus(true);
 
                 await axios
                     .post("http://localhost:5328/api/upload", formData, {
@@ -83,7 +87,11 @@ const FileUpload: React.FC = () => {
                         },
                     })
                     .then((response) => {
-                        addMessageToChat("CHATBOT", response.data);
+                        const { message, data } = response.data;
+                        addMessageToChat("CHATBOT", message);
+                        addNewMessageToChat("CHATBOT", message);
+                        setStatus(false);
+                        concatChats(data);
                     });
 
                 setUploadStatus(UploadStatus.Done);

@@ -5,6 +5,7 @@ import {
     ChatHistoryProvider,
     FileProvider,
     NameProvider,
+    TypingStatusProvider,
 } from "./context/context-provider";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -25,14 +26,16 @@ export default function RootLayout({
                 <FileProvider>
                     <NameProvider>
                         <ChatHistoryProvider>
-                            <ThemeProvider
-                                attribute='class'
-                                defaultTheme='system'
-                                enableSystem
-                                disableTransitionOnChange
-                            >
-                                {children}
-                            </ThemeProvider>
+                            <TypingStatusProvider>
+                                <ThemeProvider
+                                    attribute='class'
+                                    defaultTheme='system'
+                                    enableSystem
+                                    disableTransitionOnChange
+                                >
+                                    {children}
+                                </ThemeProvider>
+                            </TypingStatusProvider>
                         </ChatHistoryProvider>
                     </NameProvider>
                 </FileProvider>

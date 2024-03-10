@@ -7,7 +7,7 @@ export default function Home() {
             <header>
                 <Navbar />
             </header>
-            <main className='flex flex-col items-center justify-center'>
+            <main className='flex flex-col items-center justify-center pt-5'>
                 <ChatInterface />
             </main>
         </>

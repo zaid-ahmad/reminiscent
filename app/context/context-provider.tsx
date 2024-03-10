@@ -20,11 +20,22 @@ type ChatMessageType = {
 type ChatHistoryContextType = {
     chats: ChatMessageType[];
     addMessageToChat: (sender: string, message: string) => void;
+    concatChats: (oldChats: ChatMessageType[]) => void;
+    newChats: ChatMessageType[];
+    addNewMessageToChat: (sender: string, message: string) => void;
+};
+
+type TypingStatusContextType = {
+    status: boolean;
+    setStatus: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const FileContext = createContext<FileContextType | undefined>(undefined);
 const NameContext = createContext<NameContextType | undefined>(undefined);
 const ChatHistoryContext = createContext<ChatHistoryContextType | undefined>(
+    undefined
+);
+const TypingStatusContext = createContext<TypingStatusContextType | undefined>(
     undefined
 );
 
@@ -56,6 +67,16 @@ export const useChatHistoryContext = () => {
     return context;
 };
 
+export const useTypingStatusContext = () => {
+    const context = useContext(TypingStatusContext);
+    if (!context) {
+        throw new Error(
+            "useTypingStatusContext must be used within a TypingStatusProvider"
+        );
+    }
+    return context;
+};
+
 export const FileProvider = ({ children }: { children: React.ReactNode }) => {
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
@@ -84,15 +105,47 @@ export const ChatHistoryProvider = ({
     children: React.ReactNode;
 }) => {
     const [chats, setChats] = useState<ChatMessageType[]>([]);
+    const [newChats, setNewChats] = useState<ChatMessageType[]>([]);
 
     const addMessageToChat = (sender: string, message: string) => {
         const newMessage: ChatMessageType = { role: sender, message };
         setChats((prevChats) => [...prevChats, newMessage]);
     };
 
+    const concatChats = (oldChats: ChatMessageType[]) => {
+        setChats((prevChats) => [...prevChats, ...oldChats]);
+    };
+
+    const addNewMessageToChat = (sender: string, message: string) => {
+        const newMessage: ChatMessageType = { role: sender, message };
+        setNewChats((prevChats) => [...prevChats, newMessage]);
+    };
+
     return (
-        <ChatHistoryContext.Provider value={{ chats, addMessageToChat }}>
+        <ChatHistoryContext.Provider
+            value={{
+                chats,
+                addMessageToChat,
+                concatChats,
+                newChats,
+                addNewMessageToChat,
+            }}
+        >
             {children}
         </ChatHistoryContext.Provider>
+    );
+};
+
+export const TypingStatusProvider = ({
+    children,
+}: {
+    children: React.ReactNode;
+}) => {
+    const [status, setStatus] = useState<boolean>(false);
+
+    return (
+        <TypingStatusContext.Provider value={{ status, setStatus }}>
+            {children}
+        </TypingStatusContext.Provider>
     );
 };

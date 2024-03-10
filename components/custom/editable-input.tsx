@@ -24,7 +24,7 @@ const EditableTextInput = () => {
                     value={name}
                     onChange={handleTextChange}
                     onBlur={toggleEdit}
-                    className='w-full'
+                    className='w-[450px]'
                     autoFocus
                 />
             ) : (
