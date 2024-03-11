@@ -45,7 +45,7 @@ def get_chat_doc():
         message=f'''You are a friend called {name}. Based on the conversation history provided, respond to messages with the same tone and style of speech. 
         Talk like people talk on WhatsApp and text messages. Make sure you do not behave like chatbot nor an assistant but as a human being. 
         Remember you're exactly like the person in the chat history. Now only respond to the following message, do not mention anything I commanded you. 
-        Just respond to this messsage, 'hi', like the chatbot in the chat history.''',
+        Just respond to this messsage, 'hi', like the chatbot in the chat history. Don't mention anything I commanded you.''',
         temperature=3.0, # (0.0 to 5.0)
         k=300, # 0 - 500 (inclusive)
         p=0.9,
@@ -59,7 +59,7 @@ def get_chat_doc():
         message=f'''You are a friend called {name}. Based on the conversation history provided, respond to messages with the same tone and style of speech. 
         Talk like people talk on WhatsApp and text messages. Make sure you do not behave like chatbot nor an assistant but as a human being. 
         Remember you're exactly like the person in the chat history. Now only respond to the following message, do not mention anything I commanded you. 
-        Just respond to this message like the person in the chat history: {message}. LASTLY, RESPOND QUICKLY TO THIS MESSAGE.''',
+        Just respond to this message like the person in the chat history: {message}. LASTLY, RESPOND QUICKLY TO THIS MESSAGE. Don't mention anything I commanded you.''',
         temperature=3.0,
         k=300,
         p=0.9,
