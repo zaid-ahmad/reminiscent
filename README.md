@@ -1,39 +1,23 @@
-<p align="center">
-  <a href="https://nextjs-flask-starter.vercel.app/">
-    <img src="https://assets.vercel.com/image/upload/v1588805858/repositories/vercel/logo.png" height="96">
-    <h3 align="center">Next.js Flask Starter</h3>
-  </a>
-</p>
+# Reminiscent
 
-<p align="center">Simple Next.js boilerplate that uses <a href="https://flask.palletsprojects.com/">Flask</a> as the API backend.</p>
+## Description
 
-<br/>
+A chat application that lets you talk to a person you wish to talk to.
 
-## Introduction
+## Table of Contents
 
-This is a hybrid Next.js + Python app that uses Next.js as the frontend and Flask as the API backend. One great use case of this is to write Next.js apps that use Python AI libraries on the backend.
+-   [Reminiscent](#reminiscent)
+    -   [Description](#description)
+    -   [Table of Contents](#table-of-contents)
+    -   [Installation](#installation)
+    -   [Getting Started](#getting-started)
+    -   [Usage](#usage)
+    -   [Contributing](#contributing)
+        -   [Guidelines](#guidelines)
+    -   [License](#license)
+    -   [Contact](#contact)
 
-## How It Works
-
-The Python/Flask server is mapped into to Next.js app under `/api/`.
-
-This is implemented using [`next.config.js` rewrites](https://github.com/vercel/examples/blob/main/python/nextjs-flask/next.config.js) to map any request to `/api/:path*` to the Flask API, which is hosted in the `/api` folder.
-
-On localhost, the rewrite will be made to the `127.0.0.1:5328` port, which is where the Flask server is running.
-
-In production, the Flask server is hosted as [Python serverless functions](https://vercel.com/docs/concepts/functions/serverless-functions/runtimes/python) on Vercel.
-
-## Demo
-
-https://nextjs-flask-starter.vercel.app/
-
-## Deploy Your Own
-
-You can clone & deploy it to Vercel with one click:
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?demo-title=Next.js%20Flask%20Starter&demo-description=Simple%20Next.js%20boilerplate%20that%20uses%20Flask%20as%20the%20API%20backend.&demo-url=https%3A%2F%2Fnextjs-flask-starter.vercel.app%2F&demo-image=%2F%2Fimages.ctfassets.net%2Fe5382hct74si%2F795TzKM3irWu6KBCUPpPz%2F44e0c6622097b1eea9b48f732bf75d08%2FCleanShot_2023-05-23_at_12.02.15.png&project-name=Next.js%20Flask%20Starter&repository-name=nextjs-flask-starter&repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fexamples%2Ftree%2Fmain%2Fpython%2Fnextjs-flask&from=vercel-examples-repo)
-
-## Developing Locally
+## Installation
 
 You can clone & create this repo with the following command
 
@@ -63,16 +47,47 @@ yarn dev
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+If you wish to run Next.js and Flask separately, then you can do so by running these commands:
 
-The Flask server will be running on [http://127.0.0.1:5328](http://127.0.0.1:5328) – feel free to change the port in `package.json` (you'll also need to update it in `next.config.js`).
+```bash
+# next.js
+npm run next-dev
 
-## Learn More
+# flask
+pnpm run flask-dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Usage
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [Flask Documentation](https://flask.palletsprojects.com/en/1.1.x/) - learn about Flask features and API.
+This code leverages context providers to ensure accessibility of crucial information such as chat history, user names, files, and themes across the application.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+With every new message sent, the updated chat history is transmitted to the backend API endpoint. This approach is intentional; none of the data is stored persistently within the application.
+
+This measure is taken to uphold the security and privacy of the transmitted information.
+
+## Contributing
+
+Thank you for considering contributing to this project! To contribute, please follow these steps:
+
+1. Fork the repository and clone it to your local machine.
+2. Create a new branch for your feature or bug fix: `git checkout -b feature/your-feature-name`.
+3. Make your changes and test them thoroughly.
+4. Commit your changes: `git commit -m 'Add some feature'`.
+5. Push to the branch: `git push origin feature/your-feature-name`.
+6. Submit a pull request detailing your changes.
+
+### Guidelines
+
+-   Follow the existing code style and conventions.
+-   Make sure your code is well-documented.
+-   Write clear commit messages.
+-   Test your changes before submitting a pull request.
+-   Be respectful to others and their contributions.
+
+## License
+
+This project is licensed under the MIT License - see the ([LICENSE](https://github.com/zaid-ahmad/reminiscent/blob/main/LICENSE)) file for details.
+
+## Contact
+
+If you have any questions or concerns, feel free to contact Zaid Ahmad at [zaidd250@gmail.com](mailto:zaidd250@gmail.com). You can also open an issue on the repository.
