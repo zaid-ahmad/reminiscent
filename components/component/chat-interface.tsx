@@ -55,13 +55,11 @@ export function ChatInterface() {
                 formData.append("message", message);
                 setStatus(true);
 
-                await axios
-                    .post("http://localhost:5328/api/upload", formData)
-                    .then((response) => {
-                        addMessageToChat("CHATBOT", response.data);
-                        addNewMessageToChat("CHATBOT", response.data);
-                        setStatus(false);
-                    });
+                await axios.post("/api/upload", formData).then((response) => {
+                    addMessageToChat("CHATBOT", response.data);
+                    addNewMessageToChat("CHATBOT", response.data);
+                    setStatus(false);
+                });
             } catch (error) {
                 throw new Error(
                     "Some error happend in chat-interface component while sending the message to the server."
