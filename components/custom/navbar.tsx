@@ -13,8 +13,7 @@ const Navbar: FunctionComponent = () => {
         <header className='flex justify-between items-center py-3 px-7'>
             <div className='flex flex-col sm:flex-row items-center gap-2 justify-around w-full'>
                 <h2 className='text-xl font-bold'>
-                    DrUnk<span className='italic text-red-600'>s</span>
-                    hIgHhherrr
+                    Remini<span className='italic text-red-600'>s</span>cent
                 </h2>
                 <div className='flex items-center'>
                     <div className='flex items-center justify-end gap-2'>
@@ -24,7 +23,7 @@ const Navbar: FunctionComponent = () => {
                         </span>
 
                         {name !==
-                        "Click to enter the same name saved in your WhatsApp chat" ? (
+                        "What is that person saved as in your WhatsApp chat?" ? (
                             <Badge variant='outline' className='bg-emerald-500'>
                                 Online
                             </Badge>

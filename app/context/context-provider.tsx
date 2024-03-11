@@ -89,7 +89,7 @@ export const FileProvider = ({ children }: { children: React.ReactNode }) => {
 
 export const NameProvider = ({ children }: { children: React.ReactNode }) => {
     const [name, setName] = useState<string>(
-        "Click to enter the same name saved in your WhatsApp chat"
+        "What is that person saved as in your WhatsApp chat?"
     );
 
     return (
