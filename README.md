@@ -9,21 +9,12 @@ A chat application that lets you talk to a person you wish to talk to.
 -   [Reminiscent](#reminiscent)
     -   [Description](#description)
     -   [Table of Contents](#table-of-contents)
-    -   [Installation](#installation)
     -   [Getting Started](#getting-started)
     -   [Usage](#usage)
     -   [Contributing](#contributing)
         -   [Guidelines](#guidelines)
     -   [License](#license)
     -   [Contact](#contact)
-
-## Installation
-
-You can clone & create this repo with the following command
-
-```bash
-npx create-next-app nextjs-flask --example "https://github.com/vercel/examples/tree/main/python/nextjs-flask"
-```
 
 ## Getting Started
 
