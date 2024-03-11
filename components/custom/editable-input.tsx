@@ -16,6 +16,18 @@ const EditableTextInput = () => {
         setIsEditing(!isEditing);
     };
 
+    const handleFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+        event.target.select();
+    };
+
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === "Enter") {
+            const newValue = event.currentTarget.value;
+            setName(newValue);
+            setIsEditing(!isEditing);
+        }
+    };
+
     return (
         <div className='flex justify-center items-center'>
             {isEditing ? (
@@ -24,6 +36,8 @@ const EditableTextInput = () => {
                     value={name}
                     onChange={handleTextChange}
                     onBlur={toggleEdit}
+                    onFocus={handleFocus}
+                    onKeyDown={handleKeyDown}
                     className='w-[450px]'
                     autoFocus
                 />

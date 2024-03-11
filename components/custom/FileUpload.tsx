@@ -77,6 +77,9 @@ const FileUpload: React.FC = () => {
 
                 await axios
                     .post("/api/upload", formData, {
+                        headers: {
+                            "Cache-Control": "no-store",
+                        },
                         onUploadProgress: (progressEvent: any) => {
                             const percentCompleted = Math.round(
                                 (progressEvent.loaded * 100) /
