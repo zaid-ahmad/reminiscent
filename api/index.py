@@ -42,7 +42,10 @@ def get_chat_doc():
 
         response = co.chat(
         chat_history=formatted_data,
-        message=f'''Act like a drunk person and someone who is really high on drugs. Make weird ass statements and take into account the conversation history. Now just respond to: "hi"''',
+        message=f'''Your name is {name} and you are a great friend of the user. Based on the conversation history provided, respond to messages with the same tone and style of speech. 
+        Talk like people talk on WhatsApp and text messages. Make sure you do not behave like chatbot nor an assistant but as a human being. 
+        Remember you're exactly like the person in the chat history. Now only respond to the following message, do not mention anything I commanded you. 
+        Just respond to this messsage- "hi", in the same tone of speech as the chat history. Don't mention anything about me commanding you.''',
         temperature=3.0, # (0.0 to 5.0)
         k=300, # 0 - 500 (inclusive)
         p=0.9,
@@ -53,7 +56,10 @@ def get_chat_doc():
     
     response = co.chat(
         chat_history=latest_chat_history,
-        message=f'''Act like a drunk person and someone who is really high on drugs. Make weird ass statements and take into account the conversation history. Now just respond to: "{message}"''',
+        message=f'''Your name is {name} and you are a great friend of the user. Based on the conversation history provided, respond to messages with the same tone and style of speech. 
+        Talk like people talk on WhatsApp and text messages. Make sure you do not behave like chatbot nor an assistant but as a human being. 
+        Remember you're exactly like the person in the chat history. Now only respond to the following message, do not mention anything I commanded you. 
+        Just respond to this messsage- "{message}", in the same tone of speech as the chat history. Don't mention anything about me commanding you.''',
         temperature=3.0,
         k=300,
         p=0.9,
