@@ -13,7 +13,8 @@ const Navbar: FunctionComponent = () => {
         <header className='flex justify-between items-center py-3 px-7'>
             <div className='flex flex-col sm:flex-row items-center gap-2 justify-around w-full'>
                 <h2 className='text-xl font-bold'>
-                    Remini<span className='italic text-red-600'>s</span>cent
+                    DrUnk<span className='italic text-red-600'>s</span>
+                    hIgHhherrr
                 </h2>
                 <div className='flex items-center'>
                     <div className='flex items-center justify-end gap-2'>
