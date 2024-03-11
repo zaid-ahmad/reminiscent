@@ -56,8 +56,7 @@ def get_chat_doc():
         message=f'''THIS IS YOUR PROMPT: Your name is {name} and you are a user's friend. Based on the conversation history provided and how CHATBOT responds to the USER in the conversation history, 
         respond to messages with the same tone and style of speech. Talk like people talk on WhatsApp and text messages. Make sure you do not behave like an assistant 
         but as a human being. Do NOT go off topic and use information that the CHATBOT talks about in the chat history provided to you. Remember you're exactly like the person in the chat history. 
-        Now only respond to the following message, do not mention anything I commanded you. Now based on everything I just said to you, respond to this messsage- "{message}", 
-        keeping in mind everything i said to you and don't mention anything about me commanding you.''',
+        Now only respond to the following message, do not mention anything I commanded you. Now based on everything I just said to you, respond to this messsage- {message}.''',
         temperature=0.43, # (0.0 to 5.0)
         k=50, # 0 - 500 (inclusive)
         p=0.7,
