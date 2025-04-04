@@ -20,7 +20,7 @@ import { extractPersonaName, parseWhatsAppChat } from "@/lib/whatsapp-parser";
 export function FileUpload() {
     const { setSelectedFile, setFileType, fileType } = useFile();
     const { setName } = useName();
-    const { concatChats, clearChats } = useChat();
+    const { concatChats, clearChats, setOriginalContent } = useChat();
     const [isLoading, setIsLoading] = useState(false);
     const [fileName, setFileName] = useState<string>("");
 
@@ -49,6 +49,9 @@ export function FileUpload() {
 
                 // Parse the chat based on file type
                 if (fileType === "WHATSAPP" && typeof content === "string") {
+                    // Store the original chat content for AI context
+                    setOriginalContent(content);
+                    
                     const parsedChats = parseWhatsAppChat(content);
                     const personaName = extractPersonaName(content);
 

@@ -28,12 +28,12 @@ export default function Navbar() {
     };
 
     return (
-        <nav className='fixed top-0 left-0 right-0 z-50 border-b bg-background/80 backdrop-blur-sm'>
+        <nav className='fixed top-0 left-0 right-0 z-50 border-b border-[#ef5757]/20 bg-[#f1ede5]/90 backdrop-blur-sm'>
             <div className='container mx-auto px-4 py-3 flex items-center justify-between'>
                 <div className='flex items-center gap-2'>
-                    <span className='font-bold text-xl'>Reminiscent</span>
+                    <span className='font-bold text-xl text-[#ef5757]'>REMI<span className="text-black">N</span>ISCENT</span>
                     {selectedFile && name && (
-                        <span className='hidden md:inline-block text-sm text-muted-foreground'>
+                        <span className='hidden md:inline-block text-sm text-black/70 ml-2'>
                             Chatting with {name}
                         </span>
                     )}
@@ -46,27 +46,11 @@ export default function Navbar() {
                             size='icon'
                             onClick={resetApp}
                             title='Reset conversation'
+                            className="hover:bg-[#ef5757]/10 text-[#ef5757]"
                         >
                             <X className='h-5 w-5' />
                         </Button>
                     )}
-
-                    <Button
-                        variant='ghost'
-                        size='icon'
-                        onClick={() =>
-                            setTheme(theme === "dark" ? "light" : "dark")
-                        }
-                        title='Toggle theme'
-                    >
-                        {/* Only render icon when mounted to avoid hydration mismatch */}
-                        {mounted &&
-                            (resolvedTheme === "dark" ? (
-                                <Sun className='h-5 w-5' />
-                            ) : (
-                                <Moon className='h-5 w-5' />
-                            ))}
-                    </Button>
                 </div>
             </div>
         </nav>

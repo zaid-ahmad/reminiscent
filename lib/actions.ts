@@ -30,7 +30,7 @@ export async function sendMessage({
         model: openai("gpt-4o-mini"),
         system: fileContent
             ? `You are ${userName}, acting exactly like the persona shown in this chat history: ${fileContent}.
-       Use the same slang, emojis, and communication style. Be humorous and engage naturally.`
+       Use the same slang, emojis, and communication style. Engage naturally with the user.`
             : `You are ${userName}'s conversational partner. Adapt to their style, using casual language and emojis appropriately.`,
         messages: [...history, { role: "user" as const, content: userMessage }],
     });

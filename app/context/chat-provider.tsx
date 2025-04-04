@@ -1,59 +1,52 @@
 "use client";
+import { createContext, useContext, useState } from "react";
+import { ChatMessage } from "@/lib/types";
 
-import { ChatContextType, ChatMessage } from "@/lib/types";
-import React, { createContext, useContext, useState } from "react";
+interface ChatContextType {
+    chats: ChatMessage[];
+    originalChatContent: string | null;
+    concatChats: (newChats: ChatMessage[]) => void;
+    clearChats: () => void;
+    setOriginalContent: (content: string) => void;
+}
 
-const ChatHistoryContext = createContext<ChatContextType | undefined>(
-    undefined
-);
+const ChatContext = createContext<ChatContextType | undefined>(undefined);
 
-export const useChat = () => {
-    const context = useContext(ChatHistoryContext);
-    if (!context) {
-        throw new Error("useChat must be used within a ChatProvider");
-    }
-    return context;
-};
-
-export const ChatHistoryProvider = ({
-    children,
-}: {
-    children: React.ReactNode;
-}) => {
+export function ChatHistoryProvider({ children }: { children: React.ReactNode }) {
     const [chats, setChats] = useState<ChatMessage[]>([]);
-    const [newChats, setNewChats] = useState<ChatMessage[]>([]);
+    const [originalChatContent, setOriginalChatContent] = useState<string | null>(null);
 
-    const addMessageToChat = (role: "USER" | "CHATBOT", message: string) => {
-        const newMessage: ChatMessage = { role, message };
-        setChats((prevChats) => [...prevChats, newMessage]);
-    };
-
-    const concatChats = (oldChats: ChatMessage[]) => {
-        setChats((prevChats) => [...prevChats, ...oldChats]);
-    };
-
-    const addNewMessageToChat = (role: "USER" | "CHATBOT", message: string) => {
-        const newMessage: ChatMessage = { role, message };
-        setNewChats((prevChats) => [...prevChats, newMessage]);
+    const concatChats = (newChats: ChatMessage[]) => {
+        setChats((prevChats) => [...prevChats, ...newChats]);
     };
 
     const clearChats = () => {
         setChats([]);
-        setNewChats([]);
+    };
+
+    const setOriginalContent = (content: string) => {
+        setOriginalChatContent(content);
     };
 
     return (
-        <ChatHistoryContext.Provider
-            value={{
-                chats,
-                addMessageToChat,
-                concatChats,
-                newChats,
-                addNewMessageToChat,
-                clearChats,
+        <ChatContext.Provider
+            value={{ 
+                chats, 
+                originalChatContent, 
+                concatChats, 
+                clearChats, 
+                setOriginalContent 
             }}
         >
             {children}
-        </ChatHistoryContext.Provider>
+        </ChatContext.Provider>
     );
-};
+}
+
+export function useChat() {
+    const context = useContext(ChatContext);
+    if (context === undefined) {
+        throw new Error("useChat must be used within a ChatHistoryProvider");
+    }
+    return context;
+}
