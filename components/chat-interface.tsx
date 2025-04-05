@@ -67,9 +67,9 @@ export function ChatInterface(): React.JSX.Element {
             {!selectedFile ? (
                 <div className='flex flex-col items-center justify-center py-8'>
                     <h1 className='text-5xl font-black mb-6'>
-                        <span className='text-[#ef5757]'>REMI</span>
-                        <span className='text-black'>N</span>
-                        <span className='text-[#ef5757]'>ISCENT</span>
+                        <span className='text-[#ef5757]'>Remi</span>
+                        <span className='text-black'>n</span>
+                        <span className='text-[#ef5757]'>iscent</span>
                     </h1>
                     <p className='text-center mb-8 max-w-lg text-black/80'>
                         Upload a chat history to start having AI-powered
